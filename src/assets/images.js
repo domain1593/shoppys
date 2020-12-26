@@ -1,6 +1,6 @@
 
 const images = {
-    Avatar: require('./download.png'),
+    Avatar: require('./avatar.jpg'),
   }
 
   export default images;

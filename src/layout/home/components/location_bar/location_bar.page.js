@@ -5,13 +5,17 @@ import styles from './location_bar.style';
 
 class LocationBar extends React.Component {
   render() {
-    
     return (
       <>
         <View style={styles.headerDistribution}>
-          <Image source={images.Avatar}/>
-          <Text>Edit</Text>
-          <Text>Edit</Text>
+          <View style={styles.avatarFlex}>
+            <Image style={styles.AvatarStyle} source={images.Avatar} />
+          </View>
+
+          <View style={styles.locaTionInput}>
+            <Text>Edit</Text>
+            <Text>Edit</Text>
+          </View>
         </View>
       </>
     );
