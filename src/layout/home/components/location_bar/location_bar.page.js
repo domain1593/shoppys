@@ -1,14 +1,18 @@
 import React from 'react';
-import {
-    Header
-} from 'react-native/Libraries/NewAppScreen';
-
+import { Image, Text, View } from 'react-native';
+import images from 'src/assets/images.js';
+import styles from './location_bar.style';
 
 class LocationBar extends React.Component {
   render() {
+    
     return (
       <>
-        <Header />
+        <View style={styles.headerDistribution}>
+          <Image source={images.Avatar}/>
+          <Text>Edit</Text>
+          <Text>Edit</Text>
+        </View>
       </>
     );
   }
