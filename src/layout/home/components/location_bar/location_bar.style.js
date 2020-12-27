@@ -6,7 +6,7 @@ const avatarValue = 32;
 const styles = StyleSheet.create({
   headerDistribution: {
     padding: 16,
-    backgroundColor: shoppysTheme.light.neutral,
+    backgroundColor: shoppysTheme.white.neutral,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   locaTionBox: {
-    backgroundColor: shoppysTheme.white.neutral,
+    backgroundColor: shoppysTheme.light.neutral,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     flex: 4,
@@ -31,14 +31,15 @@ const styles = StyleSheet.create({
   locationIcon: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   locationInput: {
     flex: 4,
     padding: 0,
     textAlignVertical: 'center',
     textAlign: 'center',
-    height: 32
+    height: 32,
+    fontSize: 14
   }
 });
 

@@ -17,6 +17,7 @@ class LocationBar extends React.Component {
             <Icon
               name="location-sharp"
               type="ionicon"
+              size={18}
               color="#777777"
               containerStyle={styles.locationIcon}
             ></Icon>
