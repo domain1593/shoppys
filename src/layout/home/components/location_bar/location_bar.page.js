@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import images from 'src/assets/images.js';
+import { Image, TextInput, View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import images from '../../../../assets/images/images';
 import styles from './location_bar.style';
 
 class LocationBar extends React.Component {
@@ -12,9 +13,17 @@ class LocationBar extends React.Component {
             <Image style={styles.AvatarStyle} source={images.Avatar} />
           </View>
 
-          <View style={styles.locaTionInput}>
-            <Text>Edit</Text>
-            <Text>Edit</Text>
+          <View style={styles.locaTionBox}>
+            <Icon
+              name="location-sharp"
+              type="ionicon"
+              color="#777777"
+              containerStyle={styles.locationIcon}
+            ></Icon>
+            <TextInput
+              style={styles.locationInput}
+              placeholder="Edit"
+            ></TextInput>
           </View>
         </View>
       </>
