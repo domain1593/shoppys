@@ -1,52 +1,32 @@
+import axios from 'axios';
 import React from 'react';
-import { FlatList, Image, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import images from '../../../../assets/images/images';
 import styles from './category_carrousel.style';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d322372',
-    title: 'Third Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d724222',
-    title: 'Third Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72123',
-    title: 'Third Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d7233',
-    title: 'Third Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d7232',
-    title: 'Third Item',
-  },
-];
-
 class CategoryCarrouselPage extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      jsonReturnedValue: [],
+      isLoading: true,
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://192.168.0.112:3000/products').then((res) => {
+      this.setState({ isLoading: false, jsonReturnedValue: res.data });
+    });
+  }
   render() {
-    const Item = () => (
+    const Item = (data) => (
       <View style={styles.outterBackground}>
         <View style={styles.innerBackground}>
           <View>
             <View style={styles.newRow}>
-              <Text style={styles.carModel}>A5</Text>
+              <Text style={styles.carModel}>{data.product.name}</Text>
               <Text style={styles.carPrice}>$400</Text>
             </View>
             <View style={styles.newRow}>
@@ -75,17 +55,21 @@ class CategoryCarrouselPage extends React.Component {
       </View>
     );
 
-    const renderItem = ({ item }) => <Item title={item.title} />;
+    const renderItem = ({ item }) => <Item product={item} />;
 
     return (
       <>
-        <FlatList
-          style={styles.listBackground}
-          data={DATA}
-          horizontal={true}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        />
+        {this.state.isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            style={styles.listBackground}
+            data={this.state.jsonReturnedValue.phone}
+            keyExtractor={(item) => item.name}
+            horizontal={true}
+            renderItem={renderItem}
+          />
+        )}
       </>
     );
   }
