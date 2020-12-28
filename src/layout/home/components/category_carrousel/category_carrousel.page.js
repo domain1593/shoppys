@@ -1,5 +1,7 @@
 import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import images from '../../../../assets/images/images';
 import styles from './category_carrousel.style';
 
 const DATA = [
@@ -39,9 +41,37 @@ const DATA = [
 
 class CategoryCarrouselPage extends React.Component {
   render() {
-    const Item = ({ title }) => (
-      <View style={styles.itemBackground}>
-        <Text style={styles.title}>{title}</Text>
+    const Item = () => (
+      <View style={styles.outterBackground}>
+        <View style={styles.innerBackground}>
+          <View>
+            <View style={styles.newRow}>
+              <Text style={styles.carModel}>A5</Text>
+              <Text style={styles.carPrice}>$400</Text>
+            </View>
+            <View style={styles.newRow}>
+              <Text style={styles.carBrand}>Audi</Text>
+              <Text style={styles.dayCuota}>/day</Text>
+            </View>
+            <View>
+              <Image style={styles.carImage} source={images.a5} />
+            </View>
+            <View style={styles.newRow}>
+              <Icon
+                name="star"
+                type="material"
+                size={18}
+                color="#777777"
+                containerStyle={styles.starIcon}
+              ></Icon>
+              <Text style={styles.carRating}>5.0</Text>
+              <Text style={styles.carReviews}>(30)</Text>
+            </View>
+            <View style={styles.newRow}>
+              <Text style={styles.carDetails}>Details</Text>
+            </View>
+          </View>
+        </View>
       </View>
     );
 
@@ -50,7 +80,7 @@ class CategoryCarrouselPage extends React.Component {
     return (
       <>
         <FlatList
-        style={styles.listBackground}
+          style={styles.listBackground}
           data={DATA}
           horizontal={true}
           renderItem={renderItem}
