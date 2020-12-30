@@ -1,25 +1,27 @@
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 import images from '../../../../assets/images/images';
+import { fetchData } from '../../../../redux/actions/product.action';
 import styles from './category_carrousel.style';
 
 class CategoryCarrouselPage extends React.Component {
-  constructor() {
-    super();
 
-    this.state = {
-      jsonReturnedValue: [],
-      isLoading: true,
-    };
-  }
+  static get propTypes() { 
+    return { 
+        children: PropTypes.func, 
+        fetchData: PropTypes.func,
+        isLoading: PropTypes.bool,
+        products: PropTypes.object
 
+    }; 
+}
   componentDidMount() {
-    axios.get('http://192.168.0.112:3000/products').then((res) => {
-      this.setState({ isLoading: false, jsonReturnedValue: res.data });
-    });
+    this.props.fetchData();
   }
+
   render() {
     const Item = (data) => (
       <View style={styles.outterBackground}>
@@ -59,12 +61,12 @@ class CategoryCarrouselPage extends React.Component {
 
     return (
       <>
-        {this.state.isLoading ? (
+        {this.props.isLoading ? (
           <ActivityIndicator />
         ) : (
           <FlatList
             style={styles.listBackground}
-            data={this.state.jsonReturnedValue.phone}
+            data={this.props.products.phone}
             keyExtractor={(item) => item.name}
             horizontal={true}
             renderItem={renderItem}
@@ -75,4 +77,22 @@ class CategoryCarrouselPage extends React.Component {
   }
 }
 
-export default CategoryCarrouselPage;
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.product.isFetching,
+   products: state.product.data
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => {
+      return dispatch(fetchData());
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryCarrouselPage);

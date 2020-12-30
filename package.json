@@ -18,6 +18,9 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
+  "resolutions": {
+    "@react-native-community/cli-debugger-ui": "4.7.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
